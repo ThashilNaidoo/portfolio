@@ -5,7 +5,7 @@ import { profile } from './content/profile'
 import { projects } from './content/projects'
 import { recognition } from './content/recognition'
 import { skills, type TagGroup } from './content/skills'
-import ThemeToggle from './ThemeToggle'
+import WireframeMonitor from './WireframeMonitor'
 import { useActiveSection } from './useActiveSection'
 
 const year = new Date().getFullYear()
@@ -23,9 +23,9 @@ const publications = recognition.filter((item) => item.kind === 'Publication')
 const certifications = recognition.filter((item) => item.kind === 'Certification')
 const awards = recognition.filter((item) => item.kind === 'Award')
 
-function TagGroups({ groups }: { groups: TagGroup[] }) {
+function TagGroups({ groups, className }: { groups: TagGroup[]; className?: string }) {
   return (
-    <div className="tag-groups">
+    <div className={className ? `tag-groups ${className}` : 'tag-groups'}>
       {groups.map((group) => (
         <div key={group.label} className="tag-group">
           <h3>{group.label}</h3>
@@ -62,7 +62,6 @@ function App() {
               </a>
             ))}
           </nav>
-          <ThemeToggle />
         </div>
       </header>
 
@@ -80,12 +79,7 @@ function App() {
             </a>
           </div>
 
-          <div className="horizon" aria-hidden="true">
-            <div className="sun" />
-            <div className="floor">
-              <div className="grid" />
-            </div>
-          </div>
+          <WireframeMonitor />
         </section>
 
         <section id="projects" className="section container">
@@ -168,6 +162,12 @@ function App() {
             {publications.map((item) => (
               <article key={item.title} className="paper">
                 <div className="paper-sheet">
+                  <span className="folder-tab" aria-hidden="true">
+                    Case file
+                  </span>
+                  <span className="stamp" aria-hidden="true">
+                    Published
+                  </span>
                   <p className="paper-meta">
                     {item.kind} · {item.detail}
                   </p>
@@ -199,19 +199,17 @@ function App() {
               ))}
             </ul>
 
-            <ul className="medals">
+            <ul className="award-cards">
               {awards.map((item) => (
-                <li key={item.title} className="medal">
-                  <div className="medal-hang" aria-hidden="true">
-                    <span className="ribbon" />
-                    <span className="coin">★</span>
-                  </div>
-                  <h3>
-                    <span className="sr-only">{item.kind}: </span>
-                    {item.title}
-                  </h3>
-                  {item.detail && <p className="muted">{item.detail}</p>}
-                  <p className="medal-year">{item.year}</p>
+                <li key={item.title} className="award-card">
+                  <p className="award-meta">
+                    {item.kind} · {item.year}
+                  </p>
+                  <h3>{item.title}</h3>
+                  {item.detail && <p className="award-detail">{item.detail}</p>}
+                  <span className="award-stamp" aria-hidden="true">
+                    Awarded
+                  </span>
                 </li>
               ))}
             </ul>
@@ -220,7 +218,7 @@ function App() {
 
         <section id="interests" className="section container">
           <h2>Interests</h2>
-          <TagGroups groups={interests} />
+          <TagGroups groups={interests} className="labels" />
         </section>
 
         <section id="contact" className="section container contact">

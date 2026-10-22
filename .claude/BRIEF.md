@@ -13,9 +13,10 @@ Personal portfolio site showcasing projects and work experience.
 
 ## Conventions
 - Content lives in typed data files under `src/content/` (`profile.ts`, `projects.ts`, `experience.ts`, `education.ts`, `skills.ts`, `recognition.ts`, `interests.ts`), kept separate from presentation so the same data can feed the room scene later.
-- Styling: CSS custom properties in `src/index.css`. Theme is `<html data-theme="light|dark">`, set before paint by an inline script in `index.html` (saved choice, else light) and toggled by `src/ThemeToggle.tsx`.
-- Design: 70s/80s retro-futurism. Light = 70s daytime (cream, mustard, orange, brown); dark = 80s neon night (purple, magenta, cyan, scanlines). Fonts from Google Fonts: Righteous (display), Orbitron (labels), Space Grotesk (body).
-- Motion: hover lifts with hard offset shadows, clicks press flat; all motion respects `prefers-reduced-motion`.
+- Styling: CSS custom properties in `src/index.css`. One theme only (no light/dark mode).
+- Design: 1970s retro-futurist bureau, TVA-inspired in look only (no TVA references or content: the site is about me). Dark warm browns, orange as the main colour with red mixed in (gradients, stamps, far wireframe edges), amber CRT phosphor for labels, deep teal as a sparing secondary accent (secondary button hover fill, skill/interest group headings, hero coordinates), manila paper for all recognition (publication file, certificates, award index cards); interests as embossed label-maker tape. Glows and a vignette; scanlines only inside the hero monitor (page-wide scanlines hurt readability). Thin rules, square corners, numbered sections. Fonts from Google Fonts: Barlow Condensed (display), IBM Plex Mono (labels), IBM Plex Sans (body).
+- Hero: a CRT monitor with a rotating wireframe torus on a canvas, drawn like a vector display (`src/WireframeMonitor.tsx`); spins faster on hover.
+- Motion: restrained: fill wipes, HUD corner brackets, small lifts, rubber stamps on hover; all motion respects `prefers-reduced-motion`.
 
 ## Commands
 - `npm run dev`: dev server
@@ -32,3 +33,8 @@ Personal portfolio site showcasing projects and work experience.
 - 2026-10-21: Chose Vite + React + TS over Astro. The site is ultimately an art piece, so SEO and static pages matter less; React is kept so React Three Fiber can be added without a rewrite.
 - 2026-10-21: Build a polished normal site first; the room comes later.
 - 2026-10-21: Retro-futuristic 70s/80s theme with a manual light/dark toggle.
+- 2026-10-21: Replaced the cartoony first pass (thick outlines, offset shadows, synthwave sun) with a more serious TVA / Blade Runner direction.
+- 2026-10-21: Dropped light/dark mode and Blade Runner; single dark TVA theme, orange primary with red, CRT effects.
+- 2026-10-21: Removed page-wide scanlines and panel seams for readability; brass plaques became walnut + orange-red enamel; Sacred Timeline hero replaced by a wireframe torus (no TVA references).
+- 2026-10-21: Walnut plaques clashed with the manila certificates and publication; awards are now manila index cards. Interests use label-maker tape so they don't look like skills.
+- 2026-10-21: Tried swapping all red for teal; looked worse, reverted. Teal stays a slight accent only.
