@@ -29,6 +29,13 @@
   --floor: #8a2f45;
   --grid-line: #f3b33d;
 
+  /* Paper stays paper-coloured in both themes. */
+  --paper: #fffaf0;
+  --paper-ink: #2a1810;
+  --paper-muted: #6e5242;
+  --paper-rule: #e6d8be;
+  --paper-fold: #e8d6b4;
+
   --font-display: 'Righteous', system-ui, sans-serif;
   --font-tech: 'Orbitron', system-ui, sans-serif;
   --font-body: 'Space Grotesk', system-ui, sans-serif;
@@ -66,6 +73,10 @@
   --sky: linear-gradient(#0d0620, #2a0f4a 70%, #5b1a6b);
   --floor: #120826;
   --grid-line: #ff3ea5;
+
+  --paper: #f1e4cb;
+  --paper-rule: #d9c7a7;
+  --paper-fold: #d4bf98;
 }
 
 *,
@@ -200,11 +211,13 @@ a {
   transition: transform 0.3s var(--ease);
 }
 
-.site-header nav a:hover {
+.site-header nav a:hover,
+.site-header nav a.active {
   color: var(--text);
 }
 
-.site-header nav a:hover::after {
+.site-header nav a:hover::after,
+.site-header nav a.active::after {
   transform: scaleX(1);
 }
 
@@ -300,8 +313,8 @@ a {
 }
 
 .hero h1 {
-  font-size: clamp(2.4rem, 6.5vw, 4rem);
-  max-width: 18ch;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  max-width: 24ch;
   text-shadow: var(--h1-shadow);
 }
 
@@ -473,6 +486,16 @@ a {
   box-shadow: 9px 10px 0 var(--shadow-color), var(--glow);
 }
 
+.card .card-period {
+  margin: 0;
+  font-family: var(--font-tech);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-2);
+}
+
 .card h3 {
   font-size: 1.35rem;
 }
@@ -563,7 +586,7 @@ a {
   background: linear-gradient(var(--stripe-1), var(--stripe-2), var(--stripe-3), var(--stripe-4));
 }
 
-.job {
+.entry {
   position: relative;
   display: grid;
   grid-template-columns: 9rem 1fr;
@@ -571,7 +594,7 @@ a {
   transition: transform 0.3s var(--ease);
 }
 
-.job::before {
+.entry::before {
   content: '';
   position: absolute;
   top: 0.3rem;
@@ -587,17 +610,17 @@ a {
     box-shadow 0.3s var(--ease);
 }
 
-.job:hover {
+.entry:hover {
   transform: translateX(6px);
 }
 
-.job:hover::before {
+.entry:hover::before {
   transform: translateX(-6px) scale(1.25);
   background: var(--accent);
   box-shadow: var(--glow);
 }
 
-.job-dates {
+.entry-dates {
   margin: 0.2rem 0 0;
   font-family: var(--font-tech);
   font-size: 0.75rem;
@@ -606,8 +629,14 @@ a {
   color: var(--accent-2);
 }
 
-.job h3 {
+.entry h3 {
   font-size: 1.3rem;
+}
+
+.entry-location {
+  margin: 0.2rem 0 0;
+  font-size: 0.9rem;
+  color: var(--muted);
 }
 
 .highlights {
@@ -622,6 +651,321 @@ a {
 
 .highlights li::marker {
   color: var(--accent);
+}
+
+.entry-detail {
+  margin: 0.4rem 0 0;
+  font-weight: 500;
+}
+
+/* Skills and interests */
+.tag-groups {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem 2.5rem;
+}
+
+.tag-group h3 {
+  margin-bottom: 0.85rem;
+  font-family: var(--font-tech);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent-2);
+}
+
+/* Recognition: each kind is drawn as the object it is. */
+.recognition {
+  display: grid;
+  gap: 2.5rem;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* Publication: a journal page with a dog-eared corner. The outline and hard
+   shadow are drop-shadows so they follow the clipped corner. */
+.paper {
+  filter:
+    drop-shadow(2px 0 0 var(--line))
+    drop-shadow(-2px 0 0 var(--line))
+    drop-shadow(0 2px 0 var(--line))
+    drop-shadow(0 -2px 0 var(--line))
+    drop-shadow(5px 5px 0 var(--shadow-color));
+  transition: transform 0.35s var(--ease);
+}
+
+.paper:hover {
+  transform: translate(-2px, -4px) rotate(-0.6deg);
+}
+
+.paper-sheet {
+  position: relative;
+  padding: 1.75rem 2rem 2rem;
+  background: var(--paper);
+  color: var(--paper-ink);
+  clip-path: polygon(0 0, calc(100% - 2rem) 0, 100% 2rem, 100% 100%, 0 100%);
+}
+
+.paper-sheet::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 2rem;
+  height: 2rem;
+  background: linear-gradient(to bottom left, transparent 50%, var(--paper-fold) 50%);
+}
+
+.paper-meta {
+  margin: 0 0 0.75rem;
+  font-family: 'Courier New', Courier, monospace;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--paper-muted);
+}
+
+.paper h3 {
+  max-width: 32ch;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: clamp(1.3rem, 3vw, 1.65rem);
+  font-weight: 700;
+}
+
+/* Faux body text set in two columns. */
+.paper-lines {
+  height: 4.5rem;
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--paper-rule);
+  background: repeating-linear-gradient(var(--paper-rule) 0 5px, transparent 5px 13px) content-box;
+  mask-image: linear-gradient(90deg, #000 0 47%, transparent 47% 53%, #000 53%);
+}
+
+/* Link on paper items; ::after stretches it over the whole item so it is all clickable. */
+.paper-link {
+  display: inline-block;
+  margin-top: 1rem;
+  font-family: var(--font-tech);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--paper-ink);
+  text-decoration: underline 2px var(--accent);
+  text-underline-offset: 4px;
+  transition: text-underline-offset 0.25s var(--ease);
+}
+
+.paper:hover .paper-link,
+.certificate:hover .paper-link {
+  text-underline-offset: 7px;
+}
+
+.stretched-link::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+.paper:has(.stretched-link:active),
+.certificate:has(.stretched-link:active) {
+  transform: translate(2px, 2px) scale(0.99);
+  transition-duration: 0.05s;
+}
+
+/* Certifications: framed certificates with a seal. */
+.certificates,
+.medals {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.certificates {
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+  gap: 1.5rem;
+}
+
+.certificate {
+  position: relative;
+  padding: 1.75rem 1.5rem 1.25rem;
+  border: 2px solid var(--line);
+  border-radius: 4px;
+  background: var(--paper);
+  color: var(--paper-ink);
+  text-align: center;
+  outline: 5px double var(--accent);
+  outline-offset: -12px;
+  box-shadow: 5px 5px 0 var(--shadow-color);
+  transition:
+    transform 0.35s var(--ease),
+    box-shadow 0.35s var(--ease);
+}
+
+.certificate:hover {
+  transform: translate(-2px, -4px) rotate(0.5deg);
+  box-shadow: 8px 9px 0 var(--shadow-color), var(--glow);
+}
+
+.certificate-label {
+  margin: 0.5rem 0 0.6rem;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 0.75rem;
+  font-variant: small-caps;
+  letter-spacing: 0.3em;
+  color: var(--accent);
+}
+
+.certificate h3 {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.certificate-issuer {
+  margin: 0.4rem 0 0;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-style: italic;
+  color: var(--paper-muted);
+}
+
+.certificate-year {
+  margin: 0.6rem 0 0;
+  font-family: var(--font-tech);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  color: var(--paper-muted);
+}
+
+/* Seal: ribbon tails (::before) under a gold disc (::after). */
+.seal {
+  position: relative;
+  display: block;
+  width: 2.75rem;
+  height: 3.6rem;
+  margin: 0.9rem auto 0;
+  transition: transform 0.4s var(--ease);
+}
+
+.seal::before {
+  content: '';
+  position: absolute;
+  inset: 1.5rem 0.55rem 0;
+  background: var(--accent);
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 75% 82%, 50% 100%, 25% 82%, 0 100%);
+}
+
+.seal::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 2.75rem;
+  height: 2.75rem;
+  border: 2px solid var(--paper-ink);
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, transparent 52%, rgb(42 24 16 / 0.35) 53% 58%, transparent 59%),
+    var(--sun);
+}
+
+.certificate:hover .seal {
+  transform: rotate(-14deg) scale(1.1);
+}
+
+/* Awards: medals hanging from striped ribbons; they swing on hover. */
+.medals {
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: 2rem 1.5rem;
+  text-align: center;
+}
+
+.medal-hang {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform-origin: top center;
+}
+
+.medal:hover .medal-hang {
+  animation: medal-swing 1.2s var(--ease);
+}
+
+@keyframes medal-swing {
+  20% {
+    transform: rotate(10deg);
+  }
+  40% {
+    transform: rotate(-7deg);
+  }
+  60% {
+    transform: rotate(4deg);
+  }
+  80% {
+    transform: rotate(-1.5deg);
+  }
+}
+
+.ribbon {
+  width: 3.25rem;
+  height: 3.75rem;
+  background: linear-gradient(
+    90deg,
+    var(--stripe-1) 0 25%,
+    var(--stripe-2) 25% 50%,
+    var(--stripe-3) 50% 75%,
+    var(--stripe-4) 75%
+  );
+  clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
+}
+
+.coin {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: 5rem;
+  height: 5rem;
+  margin-top: -1.1rem;
+  border: 2px solid var(--line);
+  border-radius: 50%;
+  background: var(--sun);
+  color: var(--button-text);
+  font-size: 2rem;
+  box-shadow: 4px 4px 0 var(--shadow-color), var(--glow);
+}
+
+.coin::before {
+  content: '';
+  position: absolute;
+  inset: 6px;
+  border: 2px dashed rgb(42 24 16 / 0.4);
+  border-radius: 50%;
+}
+
+.medal h3 {
+  margin-top: 1.1rem;
+  font-size: 1.05rem;
+}
+
+.medal p {
+  margin: 0.3rem 0 0;
+}
+
+.medal-year {
+  font-family: var(--font-tech);
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--accent-2);
 }
 
 /* Contact */
@@ -670,6 +1014,9 @@ a {
     order: 3;
     width: 100%;
     gap: 1.25rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    scrollbar-width: none;
   }
 
   .hero {
@@ -684,7 +1031,7 @@ a {
     width: 140px;
   }
 
-  .job {
+  .entry {
     grid-template-columns: 1fr;
     gap: 0.25rem;
   }

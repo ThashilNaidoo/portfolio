@@ -12,16 +12,16 @@ export type Profile = {
   links: Link[]
 }
 
-// Placeholder copy: replace with your own.
 export const profile: Profile = {
   name: 'Thashil Naidoo',
-  role: 'Software Engineer',
-  tagline: 'I build thoughtful, well-crafted software for the web.',
+  role: 'AI/ML Software Engineer · M.Sc. Visual Computing @ SFU',
+  tagline:
+    'I build AI tools by day, write path tracers by night, and lose to Souls-like bosses in between.',
   about:
-    'A short paragraph about who you are, what you work on, and what you care about. Keep it to two or three sentences.',
-  email: 'you@example.com',
+    'AI/ML software engineer and M.Sc. Computer Science student at Simon Fraser University in Burnaby, BC, specialising in visual computing (graphics and computer vision). Previously I built RAG systems and real-time messaging backends at TecEx, and transaction APIs for Standard Bank.',
+  email: 'thashil.naidoo@gmail.com',
   links: [
-    { label: 'GitHub', href: 'https://github.com/your-handle' },
-    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/your-handle' },
+    { label: 'GitHub', href: 'https://github.com/thashilnaidoo' },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/thashilnaidoo' },
   ],
 }

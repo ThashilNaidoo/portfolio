@@ -12,8 +12,8 @@ Personal portfolio site showcasing projects and work experience.
 - Future room: React Three Fiber + drei, added only when that work starts.
 
 ## Conventions
-- Content lives in typed data files under `src/content/` (`profile.ts`, `projects.ts`, `experience.ts`), kept separate from presentation so the same data can feed the room scene later.
-- Styling: CSS custom properties in `src/index.css`. Theme is `<html data-theme="light|dark">`, set before paint by an inline script in `index.html` (saved choice, else system preference) and toggled by `src/ThemeToggle.tsx`.
+- Content lives in typed data files under `src/content/` (`profile.ts`, `projects.ts`, `experience.ts`, `education.ts`, `skills.ts`, `recognition.ts`, `interests.ts`), kept separate from presentation so the same data can feed the room scene later.
+- Styling: CSS custom properties in `src/index.css`. Theme is `<html data-theme="light|dark">`, set before paint by an inline script in `index.html` (saved choice, else light) and toggled by `src/ThemeToggle.tsx`.
 - Design: 70s/80s retro-futurism. Light = 70s daytime (cream, mustard, orange, brown); dark = 80s neon night (purple, magenta, cyan, scanlines). Fonts from Google Fonts: Righteous (display), Orbitron (labels), Space Grotesk (body).
 - Motion: hover lifts with hard offset shadows, clicks press flat; all motion respects `prefers-reduced-motion`.
 
@@ -26,7 +26,7 @@ Personal portfolio site showcasing projects and work experience.
 - Don't write or suggest tests until I start a test pass.
 
 ## Status
-- v1 scaffolded with placeholder content in `src/content/`.
+- v1 built; `src/content/` filled from resume (profile, projects, experience). Education, skills, recognition (publication, certifications, awards) and interests sections added.
 
 ## Decisions log
 - 2026-10-21: Chose Vite + React + TS over Astro. The site is ultimately an art piece, so SEO and static pages matter less; React is kept so React Three Fiber can be added without a rewrite.
